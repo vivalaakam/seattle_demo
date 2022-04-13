@@ -12,13 +12,15 @@ export default new WorkerHandler('onFramework', async (params, { log }) => {
   }
 
   const frameworks = await axios.get<Framework[]>(
-    `${STORAGE_HOST}/class/framework?authorId=${author.data._id}`
+    `${STORAGE_HOST}/class/framework?filter[authorId]=${author.data._id}`
   );
 
   const resp = await axios.post<Framework>(`${STORAGE_HOST}/class/framework`, {
     title: `yet another js framework ${frameworks.data.length + 1}`,
     authorId: author.data._id,
-    repository: `//github.com/js_author_2/js_framework${frameworks.data.length + 1}`,
+    repository: `//github.com/js_author_${author.data._id}/js_framework_${author.data._id}_${
+      frameworks.data.length + 1
+    }`,
   });
 
   log('framework created', {

@@ -11,7 +11,7 @@ export default new WorkerHandler('onBook', async (params, { log }) => {
     return;
   }
 
-  const books = await axios.get<Book[]>(`${STORAGE_HOST}/class/book?authorId=${author.data._id}`);
+  const books = await axios.get<Book[]>(`${STORAGE_HOST}/class/book?filter[authorId]=${author.data._id}`);
 
   const resp = await axios.post<Book>(`${STORAGE_HOST}/class/book`, {
     title: `yet another js book ${books.data.length + 1}`,

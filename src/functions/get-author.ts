@@ -14,7 +14,6 @@ export default new WorkerHandler<unknown>('getAuthor', async (_params, { log }) 
 
     return author.data;
   } catch (e) {
-    // @ts-ignore
     log(`author ${authorId} not found`);
 
     const resp = await axios.post<Author>(`${STORAGE_HOST}/class/author`, {
